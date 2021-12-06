@@ -3,7 +3,7 @@
 # put dockerfile and bootstrap.sh in same directory and build or enter
 # docker build  https://github.com/MaartenSanders/ycast-docker.git
 #
-FROM alpine:latest
+FROM alpine:3.17
 
 #
 # Variables
@@ -42,18 +42,12 @@ RUN apk --no-cache update && \
     apk del --no-cache build-base && \
     apk del --no-cache zlib-dev && \
     apk add --no-cache curl && \
-#    curl -L https://github.com/milaq/YCast/archive/$YC_VERSION.tar.gz \
-     curl -L https://github.com/milaq/YCast/archive/${YC_VERSION}.tar.gz \
-#    curl -L https://github.com/milaq/YCast/archive/master.tar.gz \
-#   curl -L https://github.com/milaq/YCast.git \
-#    curl -L https://codeload.github.com/MaartenSanders/YCast/tar.gz/$YC_VERSION \
+    curl -L https://github.com/milaq/YCast/archive/${YC_VERSION}.tar.gz \
     | tar xvzC /opt/ycast && \
     apk del --no-cache curl && \
     pip3 uninstall --no-cache-dir -y setuptools && \
-#    pip3 uninstall --no-cache-dir -y pip && \
     find /usr/lib -name \*.pyc -exec rm -f {} \; && \
-#    find /usr/share/terminfo -type f -not -name xterm -exec rm -f {} \; && \
-    find /usr/lib -type f -name \*.exe -exec rm -f {} \; 
+    find /usr/lib -type f -name \*.exe -exec rm -f {} \;
 
 #
 # Set Workdirectory on ycast folder
