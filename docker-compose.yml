@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  ycast:
+    image: larshaalck/ycast:1.1.0
+    ports:
+      - 80:80
+    volumes:
+      - ./stations.yml:/opt/ycast/stations.yml
+    restart: unless-stopped
